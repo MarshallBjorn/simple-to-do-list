@@ -1,0 +1,8 @@
+<tasks>
+    <task id="1" completed="false">
+        <description>Buy groceries</description>
+    </task>
+    <task id="2" completed="true">
+        <description>Finish project report</description>
+    </task>
+</tasks>

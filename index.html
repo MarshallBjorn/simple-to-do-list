@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nic-Nie-Chcianka</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <h1>Nic Nie Chcianka</h1>
+    <label for="file-input">Load XML File:</label>
+    <input type="file" id="file-input" accept=".xml">
+    <button id="save-button">Save XML</button>
+
+    <div id="input-form">
+        <form id="add-task-form">
+            <input type="text" id="task-input" placeholder="Dodaj nowy task" required>
+            <button class="task-button" type="submit">Dodaj Task</button>
+        </form>
+    </div>
+    <div id="task-list"></div>
+</body>
+<script src="script.js"></script>
+</html>
