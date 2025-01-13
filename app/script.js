@@ -1,6 +1,5 @@
-let xmlDoc = null; // To store the XML document
+let xmlDoc = null;
 
-// Load tasks from uploaded XML file
 document.getElementById("file-input").addEventListener("change", function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -14,10 +13,9 @@ document.getElementById("file-input").addEventListener("change", function (event
     }
 });
 
-// Load tasks into the UI
 function loadTasks() {
     const taskList = document.getElementById("task-list");
-    taskList.innerHTML = ""; // Clear existing tasks
+    taskList.innerHTML = ""; 
 
     if (!xmlDoc) {
         alert("No XML file loaded! New one has been created");
@@ -30,7 +28,6 @@ function loadTasks() {
         const completed = task.getAttribute("completed") === "true";
         const description = task.getElementsByTagName("description")[0].textContent;
 
-        // Create task element
         const taskDiv = document.createElement("div");
         taskDiv.className = `task ${completed ? "completed" : ""}`;
         paragraph = document.createElement("p");
@@ -39,13 +36,11 @@ function loadTasks() {
 
         const buttonDiv = document.createElement("div");
 
-        // Complete button
         const completeBtn = document.createElement("button");
         completeBtn.textContent = completed ? "Anuluj" : "Zakończone";
         completeBtn.style.width = "5rem";
         completeBtn.onclick = () => toggleComplete(id);
 
-        // Delete button
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Usuń";
         deleteBtn.style.width = "3rem";
@@ -58,7 +53,6 @@ function loadTasks() {
     }
 }
 
-// Add a new task
 function addTask(description) {
     if (!xmlDoc) {
         alert("Nie załadowano żadnego XML plika. Pomyślny XML plik stworzono.");
@@ -81,7 +75,6 @@ function addTask(description) {
     loadTasks();
 }
 
-// Toggle task completion
 function toggleComplete(id) {
     const task = xmlDoc.querySelector(`task[id="${id}"]`);
     const completed = task.getAttribute("completed") === "true";
@@ -90,7 +83,6 @@ function toggleComplete(id) {
     loadTasks();
 }
 
-// Delete a task
 function deleteTask(id) {
     const task = xmlDoc.querySelector(`task[id="${id}"]`);
     task.parentNode.removeChild(task);
@@ -98,7 +90,6 @@ function deleteTask(id) {
     loadTasks();
 }
 
-// Save the current XML data to a file
 document.getElementById("save-button").addEventListener("click", function () {
     if (!xmlDoc) {
         alert("Brak XML pliku!");
@@ -115,14 +106,13 @@ document.getElementById("save-button").addEventListener("click", function () {
     a.click();
 });
 
-// Handle form submission
 document.getElementById("add-task-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const taskInput = document.getElementById("task-input");
     const description = taskInput.value.trim();
     if (description) {
         addTask(description);
-        taskInput.value = ""; // Clear input
+        taskInput.value = ""; 
     }
 });
 
