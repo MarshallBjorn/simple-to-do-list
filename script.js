@@ -33,18 +33,22 @@ function loadTasks() {
         // Create task element
         const taskDiv = document.createElement("div");
         taskDiv.className = `task ${completed ? "completed" : ""}`;
-        taskDiv.textContent = description;
+        paragraph = document.createElement("p");
+        paragraph.textContent = description;
+        taskDiv.appendChild(paragraph);
 
         const buttonDiv = document.createElement("div");
 
         // Complete button
         const completeBtn = document.createElement("button");
-        completeBtn.textContent = completed ? "Undo" : "Complete";
+        completeBtn.textContent = completed ? "Anuluj" : "Zakończone";
+        completeBtn.style.width = "5rem";
         completeBtn.onclick = () => toggleComplete(id);
 
         // Delete button
         const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
+        deleteBtn.textContent = "Usuń";
+        deleteBtn.style.width = "3rem";
         deleteBtn.onclick = () => deleteTask(id);
 
         buttonDiv.appendChild(completeBtn);
@@ -57,7 +61,7 @@ function loadTasks() {
 // Add a new task
 function addTask(description) {
     if (!xmlDoc) {
-        alert("No XML file loaded! New one has been created.");
+        alert("Nie załadowano żadnego XML plika. Pomyślny XML plik stworzono.");
         initDefXML();
     }
 
@@ -97,7 +101,7 @@ function deleteTask(id) {
 // Save the current XML data to a file
 document.getElementById("save-button").addEventListener("click", function () {
     if (!xmlDoc) {
-        alert("No XML file loaded!");
+        alert("Brak XML pliku!");
         return;
     }
 
@@ -124,7 +128,13 @@ document.getElementById("add-task-form").addEventListener("submit", (event) => {
 
 function initDefXML() {
     const parser = new DOMParser();
-    const defXML = `<tasks></tasks>`;
+    const defXML = `<?xml version="1.0" encoding="utf-8"?>
+                    <!DOCTYPE tasks [
+                        <!ELEMENT tasks (task*)>
+                        <!ELEMENT task (description)>
+                        <!ELEMENT description (#PCDATA)>
+                        <!ATTLIST task id CDATA #REQUIRED completed (true | false) #REQUIRED>]>
+                    <tasks></tasks>`;
     xmlDoc = parser.parseFromString(defXML, "text/xml");
     console.log("Initialized a new XML structure.");
 }

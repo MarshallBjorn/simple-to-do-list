@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tasks [
+	<!ELEMENT tasks (task*)>
+        <!ELEMENT task (description)>
+        <!ELEMENT description (#PCDATA)>
+        <!ATTLIST task id CDATA #REQUIRED completed (true | false) #REQUIRED>
+]>
 <tasks>
     <task id="1" completed="false">
         <description>Buy groceries</description>
